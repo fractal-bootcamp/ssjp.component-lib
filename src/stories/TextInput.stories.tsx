@@ -24,7 +24,7 @@ const meta = {
     },
     validation: {
       control: { type: "select" },
-      options: [InputValidation.Success, InputValidation.Error],
+      options: [InputValidation.Success, InputValidation.Error, null],
     },
   },
   tags: ["autodocs"],
