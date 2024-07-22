@@ -6,4 +6,5 @@ export enum InputSize {
 
 export type TextInputProps = {
   size?: InputSize;
+  placeholder?: string;
 };
