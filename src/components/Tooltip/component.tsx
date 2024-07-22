@@ -1,24 +1,30 @@
-import {useState, useRef, useEffect} from "react";
+import {useState, useRef, useEffect, ReactNode} from "react";
 
 //content
 //customizable positions
 //triggers on button hover
 //delays
 
-function Tooltip({children, content, position}: {content: string, position: string}) {
+interface TooltipProps {
+  children: ReactNode;
+  content: string;
+  position: 'top' | 'bottom' | 'left' | 'right';
+}
+
+function Tooltip({children, content, position}: TooltipProps) {
   const [isVisible, setIsVisible] = useState(false)
-  const wrapperRef = useRef(null)
+  const wrapperRef = useRef<HTMLDivElement | null> (null)
 
   useEffect(() => {
 
     const triggerElement = wrapperRef.current
   
     const showTooltip = () => {
-      setTimeout(()=> setIsVisible(true), 300)
+      setTimeout(()=> setIsVisible(true), 200)
     };
 
     const hideTooltip = () => {
-      setTimeout(()=> setIsVisible(false), 300) 
+      setTimeout(()=> setIsVisible(false), 200) 
     };
   
     if (triggerElement) {
