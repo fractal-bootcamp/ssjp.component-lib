@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   InputSize,
   InputType,
+  InputValidation,
   PasswordVisibility,
   TextInputProps,
 } from "./types";
@@ -17,6 +18,7 @@ const TextInput = ({
   prefix,
   suffix,
   popover,
+  validation,
   ...otherProps
 }: TextInputProps) => {
   // state for popover
@@ -39,17 +41,25 @@ const TextInput = ({
   const inputDisabled = disabled ? disabled : false;
   const inputPlaceholder = placeholder ? placeholder : "Input";
   const inputSize = size ? size : InputSize.Medium;
+
   const inputPopover = popover ? (
     <Popover popover={popover} active={active} setActive={setActive} />
   ) : null;
+
+  const inputValidation = validation
+    ? validation === InputValidation.Success
+      ? "border-2 border-green-500"
+      : "border-2 border-red-500"
+    : null;
 
   return (
     <div className="relative py-6 px-4  flex flex-col items-center justify-center">
       {/* ^relative to position the popover - could be pt-6 pr-4 */}
       {inputPopover && inputPopover}
       <div
-        className={`bg-gray-200 px-4 rounded-full h-fit w-fit flex flex-row items-center ${active && "opacity-50"}`}
+        className={`bg-gray-200 px-4 rounded-full h-fit w-fit flex flex-row items-center ${active && "opacity-50"} ${inputValidation}`}
       >
+        {prefix && prefix}
         <input
           type={inputType}
           value={value}

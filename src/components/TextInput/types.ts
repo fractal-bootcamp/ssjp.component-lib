@@ -6,6 +6,11 @@ export enum InputSize {
   Large = 30,
 }
 
+export enum InputValidation {
+  Success = "success",
+  Error = "error",
+}
+
 export enum PasswordVisibility {
   Visible = "text",
   Hidden = "password",
@@ -30,4 +35,5 @@ export type TextInputProps = {
   disabled?: boolean;
   type?: InputType;
   popover?: PopoverProps;
+  validation?: InputValidation;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "prefix" | "suffix">;
