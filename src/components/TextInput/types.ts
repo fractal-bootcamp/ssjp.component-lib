@@ -1,3 +1,5 @@
+import React from "react";
+
 export enum InputSize {
   Small = 10,
   Medium = 20,
@@ -15,8 +17,10 @@ export enum InputType {
 }
 
 export type TextInputProps = {
+  prefix?: JSX.Element;
+  suffix?: React.ReactNode;
   size?: InputSize;
   placeholder?: string;
   disabled?: boolean;
   type?: InputType;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "prefix" | "suffix">;

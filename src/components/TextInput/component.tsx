@@ -5,13 +5,16 @@ import {
   PasswordVisibility,
   TextInputProps,
 } from "./types";
-import EyesOff from "../icons/EyesOff";
+
+import { Eye, EyeOff } from "lucide-react";
 
 const TextInput = ({
   size,
   placeholder,
   disabled,
   type,
+  prefix,
+  suffix,
   ...otherProps
 }: TextInputProps) => {
   const [value, setValue] = useState<string>("");
@@ -34,31 +37,45 @@ const TextInput = ({
   const inputSize = size ? size : InputSize.Medium;
 
   return (
-    <div className="h-fit w-fit flex flex-row items-center">
+    <div className="bg-gray-200 px-4 rounded-full h-fit w-fit flex flex-row items-center">
+      {prefix && prefix}
       <input
         type={inputType}
         value={value}
         placeholder={inputPlaceholder}
         size={inputSize}
         disabled={inputDisabled}
-        className="bg-gray-200"
+        className="bg-transparent py-4 px-2 hover:border-transparent focus:outline-0"
         onChange={({ target }) => setValue(target.value)}
         {...otherProps}
       />
-      {type === InputType.Password && (
-        <button
-          onClick={() => {
-            setToggleVisibility(
-              toggleVisibility === PasswordVisibility.Visible
-                ? PasswordVisibility.Hidden
-                : PasswordVisibility.Visible
-            );
-          }}
-          className="bg-transparent h-fit"
-        >
-          <EyesOff />
-        </button>
-      )}
+
+      <div className="flex flex-row items-center gap-2">
+        {type === InputType.Password ? (
+          toggleVisibility === PasswordVisibility.Visible ? (
+            <Eye
+              onClick={() => {
+                setToggleVisibility(
+                  toggleVisibility === PasswordVisibility.Visible
+                    ? PasswordVisibility.Hidden
+                    : PasswordVisibility.Visible
+                );
+              }}
+            />
+          ) : (
+            <EyeOff
+              onClick={() => {
+                setToggleVisibility(
+                  toggleVisibility === PasswordVisibility.Hidden
+                    ? PasswordVisibility.Visible
+                    : PasswordVisibility.Hidden
+                );
+              }}
+            />
+          )
+        ) : null}
+        {suffix && suffix}
+      </div>
     </div>
   );
 };
