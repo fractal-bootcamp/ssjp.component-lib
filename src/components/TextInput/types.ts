@@ -16,11 +16,18 @@ export enum InputType {
   Password = "password",
 }
 
+export type PopoverProps = {
+  icon: JSX.Element;
+  active: boolean;
+  content: string;
+};
+
 export type TextInputProps = {
   prefix?: JSX.Element;
-  suffix?: React.ReactNode;
+  suffix?: JSX.Element;
   size?: InputSize;
   placeholder?: string;
   disabled?: boolean;
   type?: InputType;
+  popover?: PopoverProps;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "prefix" | "suffix">;
