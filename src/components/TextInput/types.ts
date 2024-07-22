@@ -4,6 +4,11 @@ export enum InputSize {
   Large = 30,
 }
 
+export enum PasswordVisibility {
+  Visible = "text",
+  Hidden = "password",
+}
+
 export enum InputType {
   Text = "text",
   Password = "password",

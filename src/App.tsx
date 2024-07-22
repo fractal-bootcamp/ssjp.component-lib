@@ -5,9 +5,9 @@ import { InputSize, InputType } from "./components/TextInput/types";
 function App() {
   return (
     <TextInput
-      size={InputSize.Large}
+      size={InputSize.Medium}
       placeholder="text here guy"
-      type={InputType.Password}
+      type={InputType.Text}
     />
   );
 }
