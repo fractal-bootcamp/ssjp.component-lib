@@ -1,96 +1,28 @@
 import React from "react";
-import { InputSize, TextInputProps } from "./types";
+import { InputSize, InputType, TextInputProps } from "./types";
 
 const TextInput = ({
   size,
   placeholder,
   disabled,
+  type,
   ...otherProps
 }: TextInputProps) => {
+  const inputDisabled = disabled ? disabled : false;
   const inputPlaceholder = placeholder ? placeholder : "Input";
+  const inputType = type ? type : InputType.Text;
+  const inputSize = size ? size : InputSize.Medium;
 
-  switch (size) {
-    case InputSize.Small:
-      if (disabled) {
-        return (
-          <input
-            type="text"
-            placeholder={inputPlaceholder}
-            size={InputSize.Small}
-            className="bg-gray-200 cursor-not-allowed"
-            disabled
-            {...otherProps}
-          />
-        );
-      } else {
-        return (
-          <input
-            type="text"
-            placeholder={inputPlaceholder}
-            size={InputSize.Small}
-            className="bg-gray-200"
-            {...otherProps}
-          />
-        );
-      }
-
-    case InputSize.Medium:
-      if (disabled) {
-        return (
-          <input
-            type="text"
-            placeholder={inputPlaceholder}
-            size={InputSize.Medium}
-            className="bg-gray-200 cursor-not-allowed"
-            disabled
-            {...otherProps}
-          />
-        );
-      } else {
-        return (
-          <input
-            type="text"
-            placeholder={inputPlaceholder}
-            size={InputSize.Medium}
-            className="bg-gray-200"
-            {...otherProps}
-          />
-        );
-      }
-    case InputSize.Large:
-      if (disabled) {
-        return (
-          <input
-            type="text"
-            placeholder={inputPlaceholder}
-            size={InputSize.Large}
-            className="bg-gray-200 cursor-not-allowed"
-            disabled
-            {...otherProps}
-          />
-        );
-      } else {
-        return (
-          <input
-            type="text"
-            placeholder={inputPlaceholder}
-            size={InputSize.Large}
-            className="bg-gray-200"
-            {...otherProps}
-          />
-        );
-      }
-    default:
-      return (
-        <input
-          type="text"
-          placeholder={inputPlaceholder}
-          size={InputSize.Medium}
-          className="bg-gray-200"
-          {...otherProps}
-        />
-      );
-  }
+  return (
+    <input
+      type={inputType}
+      placeholder={inputPlaceholder}
+      size={inputSize}
+      disabled={inputDisabled}
+      className="bg-gray-200"
+      {...otherProps}
+    />
+  );
 };
 
 export default TextInput;
