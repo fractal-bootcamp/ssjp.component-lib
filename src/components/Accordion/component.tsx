@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Minus, ChevronDown } from 'lucide-react';
 
 export type AccordionDataItem = {
 	title: string;
@@ -7,15 +8,30 @@ export type AccordionDataItem = {
 
 export type AccordianDataItems = AccordionDataItem[];
 
-const AccordionItem = ({ title, children }: { title: string; children: React.ReactNode }) => {
-	const [isOpen, setIsOpen] = useState(false);
+export interface AccordionItemProps {
+	title: string;
+	children: React.ReactNode;
+	expanded?: boolean;
+}
+
+const AccordionItem = ({ title, children, expanded }: AccordionItemProps) => {
+	const [isOpen, setIsOpen] = useState(expanded);
+	const [isActive, setIsActive] = useState(expanded);
+	const icon = isActive ? <ChevronDown /> :  <Minus />;
+
 	return (
-		<div className="border border-leaf-light rounded-md overflow-hidden w-full">
+		<div className="border border-sky-light rounded-md overflow-hidden w-full">
 			<button
-				className="w-full text-left px-4 py-2 bg-moss-dark"
-				onClick={() => setIsOpen(!isOpen)}
+				className="w-full text-left px-4 py-2 bg-sky-light"
+				onClick={() => {
+					setIsOpen(!isOpen);
+					setIsActive(!isActive);
+				}}
 			>
-				<p className="text-tan-dark">{title}</p>
+				<div className="flex flex-row justify-between items-center">
+					<p className="text-bark-dark">{title}</p>
+					<span className="text-bark-dark">{icon}</span>
+				</div>
 			</button>
 			{isOpen && (
 				<div className="px-4 py-2 text-left">
@@ -26,20 +42,24 @@ const AccordionItem = ({ title, children }: { title: string; children: React.Rea
 	);
 };
 
+export interface AccordionProps {
+	data: AccordianDataItems;
+	expanded?: boolean;
+}
 
-export default function Accordion({ data }: { data: AccordianDataItems }) {
+export default function Accordion({ data, expanded }: AccordionProps) {
 
 	return (
 		<div className="overflow-hidden w-full">
 			{data.map((item, index) => (
-				<div className="bg-bark-light rounded-md">
-				<AccordionItem key={index} title={item.title}>
-					{Array.isArray(item.content) ? (
-						<Accordion data={item.content} />
-					) : (
-						<p className="text-leaf-light">{item.content}</p>
-					)}
-				</AccordionItem>
+				<div className="bg-bark-light rounded-md flex flex-row">
+					<AccordionItem key={index} title={item.title} expanded={expanded}>
+						{Array.isArray(item.content) ? (
+							<Accordion data={item.content} expanded={expanded} />
+						) : (
+							<p className="text-cloud">{item.content}</p>
+						)}
+					</AccordionItem>
 				</div>
 			))}
 		</div>

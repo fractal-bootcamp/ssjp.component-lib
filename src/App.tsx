@@ -26,14 +26,22 @@ const data = [
           },
         ],
       },
+      {
+        title: "Nested Item 3",
+        content: "Nested Item 3 content",
+      },
     ],
+  },
+  {
+    title: "Single Item 2",
+    content: "Single Item 2 content",
   },
 ];
 
 function App() {
   return (
     <div className="container w-full m-auto p-auto">
-      <Accordion data={data} />
+      <Accordion data={data} expanded={true} />
     </div>
   );
 }
