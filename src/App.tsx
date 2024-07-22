@@ -3,7 +3,7 @@ import TextInput from "./components/TextInput/component";
 import { InputSize } from "./components/TextInput/types";
 
 function App() {
-  return <TextInput size={InputSize.Large} />;
+  return <TextInput size={InputSize.Large} disabled />;
 }
 
 export default App;

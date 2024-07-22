@@ -7,4 +7,5 @@ export enum InputSize {
 export type TextInputProps = {
   size?: InputSize;
   placeholder?: string;
-};
+  disabled?: boolean;
+} & React.InputHTMLAttributes<HTMLInputElement>;
