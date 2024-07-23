@@ -1,6 +1,6 @@
 import "./App.css";
 import Timeline from "./components/Timeline/component";
-import { Camera, Calendar } from 'lucide-react';
+import { Camera, Calendar, Rocket, CalendarDays, Lightbulb } from 'lucide-react';
 
 
 function App() {
@@ -8,29 +8,56 @@ function App() {
     <div>
       <Timeline data={[
         {
-          id: 'event1',
-          date: 'Jan 15, 2023',
-          title: 'Single Event',
-          description: 'This is a standalone event.',
-          detailedDescription: 'More details about this standalone event.',
-          icon: <Calendar size={16} />,
-        },
-        {
           id: 'group1',
-          title: '2023 Events',
+          title: 'Ancient Civilizations',
           events: [
             {
-              id: 'event2',
-              date: 'Mar 1, 2023',
-              title: 'Project Milestone',
-              description: 'Completed the first phase.',
-              detailedDescription: 'Detailed information about the first project phase completion.',
-              icon: <Camera size={16} />,
+              id: 'event1',
+              date: '3000 BC',
+              title: 'The Great Pyramid',
+              description: 'Construction of the Great Pyramid of Giza begins',
+              detailedDescription: 'The Great Pyramid of Giza, also known as the Pyramid of Cheops, is the oldest and largest of the three pyramids in the Giza pyramid complex.',
+              icon: <CalendarDays />
             },
-            // More events...
+            {
+              id: 'event2',
+              date: '1200 BC',
+              title: 'Trojan War',
+              description: 'The legendary Trojan War takes place',
+              detailedDescription: 'The Trojan War was a legendary conflict between the early Greeks and the people of Troy in western Anatolia, dated by later Greek authors to the 12th or 13th century BC.',
+              icon: undefined
+            },
           ],
         },
-        // More events or groups...
+        {
+          id: 'group2',
+          title: 'Age of Exploration',
+          events: [
+            {
+              id: 'event3',
+              date: '1492',
+              title: 'Columbus Sails the Ocean Blue',
+              description: 'Christopher Columbus reaches the Americas',
+              detailedDescription: 'On August 3, 1492, Columbus set sail from Spain to find an all-water route to Asia. On October 12, more than two months later, Columbus landed on an island in the Bahamas that he called San Salvador.',
+              icon: <Rocket />,
+              image: 'https://example.com/columbus-voyage.jpg',
+            },
+          ],
+        },
+        {
+          id: 'group3',
+          title: 'Inventions',
+          events: [
+            {
+              id: 'event4',
+              date: '1879',
+              title: 'Edison\'s Light Bulb',
+              description: 'Thomas Edison invents the light bulb',
+              detailedDescription: 'After many experiments, Thomas Edison invented an incandescent light bulb that could be used for about 40 hours without burning out.',
+              icon: <Lightbulb />,
+            },
+          ],
+        },
       ]
       } />
     </div>
