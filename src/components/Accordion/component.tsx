@@ -1,6 +1,35 @@
 import { useState } from "react";
 import { Minus, ChevronDown } from 'lucide-react';
 
+export interface AccordionProps {
+	data: AccordianDataItems;
+	expanded?: boolean;
+	listStyle?: {
+		header?: {};
+		item?: {};
+		text?: {};
+	}
+}
+
+export default function Accordion({ data, expanded, listStyle }: AccordionProps) {
+
+	return (
+		<div className="overflow-hidden w-full">
+			{data.map((item, index) => (
+				<div key={index} className="bg-bark-light rounded-md flex flex-row" style={listStyle?.item}>
+					<AccordionItem title={item.title} expanded={expanded} headerStyle={listStyle?.header}>
+						{Array.isArray(item.content) ? (
+							<Accordion data={item.content} expanded={expanded} listStyle={listStyle} />
+						) : (
+							<p className="text-cloud" style={listStyle?.text}>{item.content}</p>
+						)}
+					</AccordionItem>
+				</div>
+			))}
+		</div>
+	);
+}
+
 export type AccordionDataItem = {
 	title: string;
 	content: string | AccordionDataItem[];
@@ -41,32 +70,3 @@ const AccordionItem = ({ title, children, expanded, headerStyle }: AccordionItem
 		</div>
 	);
 };
-
-export interface AccordionProps {
-	data: AccordianDataItems;
-	expanded?: boolean;
-	listStyle?: {
-		header?: {};
-		item?: {};
-		text?: {};
-	}
-}
-
-export default function Accordion({ data, expanded, listStyle }: AccordionProps) {
-
-	return (
-		<div className="overflow-hidden w-full">
-			{data.map((item, index) => (
-				<div key={index} className="bg-bark-light rounded-md flex flex-row" style={listStyle?.item}>
-					<AccordionItem title={item.title} expanded={expanded} headerStyle={listStyle?.header}>
-						{Array.isArray(item.content) ? (
-							<Accordion data={item.content} expanded={expanded} listStyle={listStyle} />
-						) : (
-							<p className="text-cloud" style={listStyle?.text}>{item.content}</p>
-						)}
-					</AccordionItem>
-				</div>
-			))}
-		</div>
-	);
-}
