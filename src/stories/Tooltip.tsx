@@ -12,7 +12,7 @@ interface TooltipProps {
   position: 'top' | 'bottom' | 'left' | 'right';
 }
 
-function Tooltip({children, content, position}: TooltipProps) {
+function Tooltip({children = <button>Hover Me</button>, content, position}: TooltipProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [shouldRender, setShouldRender] = useState(false)
   const wrapperRef = useRef<HTMLDivElement | null> (null)
