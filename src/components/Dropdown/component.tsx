@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { ChevronDown, X } from 'lucide-react';
+import { ChevronDown, X, Check } from 'lucide-react';
 
 interface Option {
     value: string;
@@ -7,7 +7,7 @@ interface Option {
     disabled?: boolean;
 }
 
-interface DropdownProps {
+export interface DropdownProps {
     options: Option[];
     multiSelect?: boolean;
     placeholder?: string;
