@@ -32,7 +32,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Primary: Story = {
+export const SingleItem: Story = {
   args: {
     data: [
       {
@@ -86,7 +86,7 @@ export const Nested: Story = {
   },
 };
 
-export const Large: Story = {
+export const MultiItem: Story = {
   args: {
     data: [
       {
@@ -99,5 +99,21 @@ export const Large: Story = {
       },
     ],
     expanded: true,
+  },
+};
+
+export const StyledItem: Story = {
+  args: {
+    data: [
+      {
+        title: "Styled Item",
+        content: "Styled Item content",
+      },
+    ],
+    listStyle: {
+      header: { backgroundColor: "red" },
+      item: { backgroundColor: "blue" },
+      text: { color: "green" },
+    },
   },
 };
