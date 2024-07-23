@@ -1,10 +1,16 @@
-type Shape = "icon" | "image" | "title" | "text";
+type Shape = "icon" | "image" | "title" | "text" | "user_post" | "image_post"
 type Size = "small" | "medium" | "large";
+type Style = "pulse" | "shimmer"
 
-export default function Skeleton({shape, size}: {shape: Shape, size: Size}) {
+export default function Skeleton({shape, size, style}: {shape: Shape, size: Size, style: Style}) {
 
     //common style for all elements
-    const BASE_STYLE = 'bg-tan animate-pulse mb-2'
+    const BASE_STYLE = 'bg-bark-light border-bark shadow'
+
+    const ANIMATION_STYLE = {
+        pulse: 'animate-pulse',
+        shimmer: 'skeleton-shimmer'
+    }
 
     const SKELETON_SHAPES = {
         icon: 'rounded-full',
@@ -27,8 +33,8 @@ export default function Skeleton({shape, size}: {shape: Shape, size: Size}) {
     
     const TITLE_SIZES = {
         small: 'w-[4rem] h-[1rem]',
-        medium: 'w-[6rem] h-[1.5rem]',
-        large: 'w-[8rem] h-[2rem]'
+        medium: 'w-[6rem] h-[1.25rem]',
+        large: 'w-[8rem] h-[1.5rem]'
     }
     
     const TEXT_SIZES = {
@@ -51,7 +57,50 @@ export default function Skeleton({shape, size}: {shape: Shape, size: Size}) {
         }
     }
 
+    if (shape === "user_post") {
+        return(
+            <div className="flex flex-col shadow border-bark bg-tan py-4 px-6 rounded"> 
+                <div className="flex flex-row mb-2" >
+                    <div className="mr-2"> 
+                        <Skeleton shape="icon" size={size} style={style}/> 
+                    </div>
+                    <div className="flex flex-col justify-center">
+                        <Skeleton shape="title" size={size} style={style}/> 
+                    </div>
+                </div>
+                <div className='mb-2'>
+                    <Skeleton shape="image" size={size} style={style}/> 
+                </div> 
+                <div className='mb-2'>
+                    <Skeleton shape="text" size={size} style={style}/> 
+                </div> 
+            </div>
+
+        )
+    }
+
+    if (shape === "image_post") {
+        return(
+            <div className="flex flex-col shadow border-bark bg-tan p-6 rounded"> 
+                <div className='mb-2'>
+                    <Skeleton shape="image" size={size} style={style}/> 
+                </div>
+                <div className='mb-2'>
+                    <Skeleton shape="title" size={size} style={style}/> 
+                </div>
+                <div className='mb-2'>
+                    <Skeleton shape="text" size={size} style={style}/> 
+                </div>
+                <div className='mb-2'>
+                    <Skeleton shape="text" size={size} style={style}/> 
+                </div>
+
+            </div>
+
+        )
+    }
+
 return(
-    <div className={`${BASE_STYLE} ${getSize()} ${SKELETON_SHAPES[shape]}`}> </div> 
+    <div className={`${BASE_STYLE} ${getSize()} ${SKELETON_SHAPES[shape]} ${ANIMATION_STYLE[style]}`}> </div> 
 )
 }
