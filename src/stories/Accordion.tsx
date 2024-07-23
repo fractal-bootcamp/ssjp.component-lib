@@ -17,8 +17,7 @@ export interface AccordionItemProps {
 
 const AccordionItem = ({ title, children, expanded, headerStyle }: AccordionItemProps) => {
 	const [isOpen, setIsOpen] = useState(expanded);
-	const [isActive, setIsActive] = useState(expanded);
-	const icon = isActive ? <ChevronDown /> :  <Minus />;
+	const icon = isOpen ? <ChevronDown /> : <Minus />;
 
 	return (
 		<div className="border border-sky-light rounded-md overflow-hidden w-full">
@@ -26,8 +25,7 @@ const AccordionItem = ({ title, children, expanded, headerStyle }: AccordionItem
 				className="w-full text-left px-4 py-2 bg-sky-light"
 				onClick={() => {
 					setIsOpen(!isOpen);
-					setIsActive(!isActive);
-				}} 
+				}}
 				style={headerStyle}
 			>
 				<div className="flex flex-row justify-between items-center">
@@ -59,8 +57,8 @@ export default function Accordion({ data, expanded, listStyle }: AccordionProps)
 	return (
 		<div className="overflow-hidden w-full">
 			{data.map((item, index) => (
-				<div className="bg-bark-light rounded-md flex flex-row" style={listStyle?.item}>
-					<AccordionItem key={index} title={item.title} expanded={expanded} headerStyle={listStyle?.header}>
+				<div key={index} className="bg-bark-light rounded-md flex flex-row" style={listStyle?.item}>
+					<AccordionItem title={item.title} expanded={expanded} headerStyle={listStyle?.header}>
 						{Array.isArray(item.content) ? (
 							<Accordion data={item.content} expanded={expanded} listStyle={listStyle} />
 						) : (
