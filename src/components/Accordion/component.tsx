@@ -12,9 +12,10 @@ export interface AccordionItemProps {
 	title: string;
 	children: React.ReactNode;
 	expanded?: boolean;
+	headerStyle?: {};
 }
 
-const AccordionItem = ({ title, children, expanded }: AccordionItemProps) => {
+const AccordionItem = ({ title, children, expanded, headerStyle }: AccordionItemProps) => {
 	const [isOpen, setIsOpen] = useState(expanded);
 	const [isActive, setIsActive] = useState(expanded);
 	const icon = isActive ? <ChevronDown /> :  <Minus />;
@@ -26,7 +27,8 @@ const AccordionItem = ({ title, children, expanded }: AccordionItemProps) => {
 				onClick={() => {
 					setIsOpen(!isOpen);
 					setIsActive(!isActive);
-				}}
+				}} 
+				style={headerStyle}
 			>
 				<div className="flex flex-row justify-between items-center">
 					<p className="text-bark-dark">{title}</p>
@@ -45,19 +47,24 @@ const AccordionItem = ({ title, children, expanded }: AccordionItemProps) => {
 export interface AccordionProps {
 	data: AccordianDataItems;
 	expanded?: boolean;
+	listStyle?: {
+		header?: {};
+		item?: {};
+		text?: {};
+	}
 }
 
-export default function Accordion({ data, expanded }: AccordionProps) {
+export default function Accordion({ data, expanded, listStyle }: AccordionProps) {
 
 	return (
 		<div className="overflow-hidden w-full">
 			{data.map((item, index) => (
-				<div className="bg-bark-light rounded-md flex flex-row">
-					<AccordionItem key={index} title={item.title} expanded={expanded}>
+				<div className="bg-bark-light rounded-md flex flex-row" style={listStyle?.item}>
+					<AccordionItem key={index} title={item.title} expanded={expanded} headerStyle={listStyle?.header}>
 						{Array.isArray(item.content) ? (
-							<Accordion data={item.content} expanded={expanded} />
+							<Accordion data={item.content} expanded={expanded} listStyle={listStyle} />
 						) : (
-							<p className="text-cloud">{item.content}</p>
+							<p className="text-cloud" style={listStyle?.text}>{item.content}</p>
 						)}
 					</AccordionItem>
 				</div>
